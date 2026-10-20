@@ -1,61 +1,128 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Christmas Party Planner
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Christmas Party Planner is a full-featured web application designed to organize and manage holiday parties, gift exchanges, awards, and event logistics. Built with Laravel, Inertia.js, and Vue 3, it provides groups with tools to coordinate Secret Santa draws, manage participant wishlists, vote on fun party awards, and track food budgets and payments.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Multi-Event and Group Support
+  - Create distinct party projects using unique URL slugs.
+  - Custom participant roster management per project.
+  - Join flow for participants.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Secret Santa and Gift Exchange
+  - Automated Secret Santa assignments with collision prevention.
+  - Codename assignment and anonymity features to keep pairings secret.
+  - Unique secret codes for secure participant verification.
+  - Automated email dispatch of assignments to participants.
+  - Gift purchase status tracking.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Wishlist Management
+  - Code-based participant lookup to protect privacy without requiring full accounts.
+  - Personalized wishlist items and detailed item descriptions.
+  - Real-time updates so Secret Santas know what to buy.
 
-## Learning Laravel
+- Gift Ideas and Theme Polling
+  - Curated gift categories such as Small Gifts and themed suggestions.
+  - Ability to save and broadcast gift ideas to attendees via email.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Party Awards and Live Voting
+  - Configurable award categories for team or party members.
+  - Code-authenticated voting to prevent duplicate or invalid ballots.
+  - Real-time vote status and results calculation.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Food Planning and Expense Splitting
+  - Collaborative dish and grocery item checklist with quantity and pricing.
+  - Automatic calculation of total costs and per-person contributions.
+  - Payer assignment and contribution tracking.
+  - Payment status monitoring (unpaid/paid).
+  - GCash payment account information and QR code display for quick reimbursement.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tech Stack
 
-## Laravel Sponsors
+- Backend Framework: Laravel 12 (PHP 8.2+)
+- Frontend Framework: Vue 3 (Composition API)
+- Monolith Bridge: Inertia.js (Inertia Laravel 2.0 / Inertia Vue3)
+- Styling: Tailwind CSS
+- Asset Bundling: Vite
+- Additional Libraries: Chart.js, vue-chartjs, canvas-confetti, vue-toastification
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Prerequisites
 
-### Premium Partners
+Before running the application locally, ensure you have the following installed:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- PHP >= 8.2
+- Composer
+- Node.js >= 18.x and npm
+- A relational database (MySQL, PostgreSQL, or SQLite)
 
-## Contributing
+## Installation and Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clone the repository:
+```bash
+git clone https://github.com/joramleonardo/christmas_party_planner.git
+cd christmas_party_planner
+```
 
-## Code of Conduct
+2. Install PHP dependencies:
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Install JavaScript dependencies:
+```bash
+npm install
+```
 
-## Security Vulnerabilities
+4. Configure environment settings:
+```bash
+cp .env.example .env
+```
+Update your `.env` file with your database connection details and mail credentials.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Generate application encryption key:
+```bash
+php artisan key:generate
+```
+
+6. Run database migrations:
+```bash
+php artisan migrate
+```
+
+7. Build frontend assets:
+For local development with hot reload:
+```bash
+npm run dev
+```
+For production build:
+```bash
+npm run build
+```
+
+8. Start the local server:
+```bash
+php artisan serve
+```
+
+Access the application in your browser at `http://127.0.0.1:8000`.
+
+## Mail Configuration
+
+The application sends Secret Santa assignments, access codes, and event updates via email. For notifications to function properly, configure your mail provider settings in `.env`:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAIL_USERNAME=your-username
+MAIL_PASSWORD=your-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="no-reply@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+For local testing, tools such as Mailpit, Mailtrap, or the `log` driver (`MAIL_MAILER=log`) can be used.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the MIT License.
